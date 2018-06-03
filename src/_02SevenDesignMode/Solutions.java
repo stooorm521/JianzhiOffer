@@ -5,6 +5,9 @@ public class Solutions {
          * 单例模式，饿汉式，线程安全
          */
         public static class Singleton {
+            //INSTANCE为实力化对象
+            // 单例模式根据实例化对象时机的不同分为两种：一种是饿汉式单例，一种是懒汉式单例。
+            // 饿汉式单例在单例类被加载时候，就实例化一个对象交给自己的引用；而懒汉式在调用取得实例方法的时候才会实例化对象。代码如下：
             private final static Singleton INSTANCE = new Singleton();
 
             private Singleton() {
