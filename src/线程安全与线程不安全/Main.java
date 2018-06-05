@@ -2,6 +2,7 @@ package 线程安全与线程不安全;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
 // ArrayList是非线程安全的，Vector是线程安全的;
 // HashMap是非线程安全的，HashTable是线程安全的;
@@ -17,6 +18,9 @@ public class Main {
     public static void test() {
         // 用来测试的List
         List<Object> list = new ArrayList<Object>();
+//***********************改成Vector来测试**********************************
+// List<Object> list=new Vector<Object>();
+        //or new LinedList<Object>(); 也是非线程安全的
 
         // 线程数量(1000)
         int threadCount = 1000;
