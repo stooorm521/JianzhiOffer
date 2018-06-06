@@ -31,16 +31,11 @@ public class Pi {
     }
 
     public void run(int n, int scale) {
-        if (System.getProperty("debug") != null) {
-            System.out.println("n=" + n);
-        }
-
         BigDecimal upper = new BigDecimal(426880.0000 * Math.sqrt(10005.0000));
-        // ROUND_HALF_EVEN的意思就是，将这个BigDecimal小数点后保留x位
-        // 四舍五入的方式为向最接近数字方向舍入的舍入 模式，如果与两个相邻数字的距离相等，则向相邻的偶数舍入。
-        // 看来以后要用bigDecimal还必须要用它这个scale的功能来保证精度，不然还是跟double一样会出现悲剧！
-
-       /* Because
+/*        ROUND_HALF_EVEN的意思就是，将这个BigDecimal小数点后保留x位
+        四舍五入的方式为向最接近数字方向舍入的舍入 模式，如果与两个相邻数字的距离相等，则向相邻的偶数舍入。
+        看来以后要用bigDecimal还必须要用它这个scale的功能来保证精度，不然还是跟double一样会出现悲剧！
+        Because:
         BigDecimal aa = new BigDecimal(135.95);
         BigDecimal bb=new BigDecimal("100");
         System.out.println(aa.multiply(bb));
@@ -50,17 +45,9 @@ public class Pi {
         BigDecimal test1 = new BigDecimal(100);
         System.out.println(test.multiply(test1));
         13594.99999999999886313162278383970260620117187500
-        401.49999999999996802557689079549163579940795898437500
-        */
-
+        401.49999999999996802557689079549163579940795898437500*/
         upper = upper.setScale(scale, BigDecimal.ROUND_HALF_EVEN);
-
-        if (System.getProperty("debug") != null) {
-            System.out.println("upper=" + upper);
-        }
-
         BigDecimal downer = BigDecimal.valueOf(0);
-
         for (int i = 0; i <= n; i++) {
             BigDecimal d0 = factorial(6 * i).multiply(new BigDecimal(545140134 * i + 13591409));
             BigDecimal d1 = factorial(i);
@@ -71,24 +58,8 @@ public class Pi {
             BigDecimal d6 = d4.multiply(d5);
             BigDecimal d = d0.divide(d6, BigDecimal.ROUND_HALF_EVEN);
             downer = downer.add(d);
-
         }
-
-        if (System.getProperty("debug") != null) {
-            System.out.println("downer=" + downer);
-        }
-
-        if (System.getProperty("debug") != null) {
-            System.out.println("upper.scale = " + upper.scale());
-            System.out.println("downer.scale = " + downer.scale());
-        }
-
         result = upper.divide(downer, BigDecimal.ROUND_HALF_EVEN);
-
-        if (System.getProperty("debug") != null) {
-            System.out.println("result.scale = " + result.scale());
-        }
-
     }
 
     public BigDecimal getResult() {
@@ -122,16 +93,15 @@ public class Pi {
             System.out.println("usage: " + "java nz-baby.Pi " + " n(0- ) scale(1-4294967296)");
             System.exit(-1);
         }
-
         int n = Integer.parseInt(args[0]);
         int scale = Integer.parseInt(args[1]);
-
         System.out.println("palgorithm n=" + n + " scale=" + scale);
         System.out.println("start:" + new Date(System.currentTimeMillis()));
         Pi p = new Pi();
         p.run(n, scale);
         System.out.println("end:" + new Date(System.currentTimeMillis()));
-//        System.out.println("result=" + p.getResult());
+        System.out.println("result=" + p.getResult());
+        //使用的时候在run configurations 的 program arguments 里面 直接填上 n scale 用空格隔开
         try {
             File file = new File("5.txt");
             PrintStream ps = new PrintStream(new FileOutputStream(file));
