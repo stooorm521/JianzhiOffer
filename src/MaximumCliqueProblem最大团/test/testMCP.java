@@ -1,6 +1,6 @@
 package MaximumCliqueProblem最大团.test;
 
-import clique.BBClique;
+import MaximumCliqueProblem最大团.clique.BBClique;
 
 public class testMCP {
 
@@ -15,11 +15,11 @@ public class testMCP {
 		int bestn= BBC.maxClique();
 		long end=System.nanoTime();
 		long s=(end-start)/1000;
-		System.out.println("ͼ���ڽӾ���");
+		System.out.println("图的邻接矩阵：");
 		BBC.printa();
-	    System.out.println("\n����Ŷ�����Ϊ��"+bestn); 
-	    BBC.printb();
-	    System.out.println("\n����ʱ�䣺"+s+"΢��");  
+		System.out.println("\n最大团顶点数为："+bestn);
+		BBC.printb();
+		System.out.println("\n运行时间："+s+"微秒");
 	}
 
 }
