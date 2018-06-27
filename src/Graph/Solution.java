@@ -2,7 +2,6 @@ package Graph;
 
 import java.util.*;
 
-public class Solution {
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
@@ -19,7 +18,7 @@ import java.util.List;
         }
     }
 
-    public class Bipartite {
+    public class Solution {
 
 
         public boolean isBipartite(List<GraphNode> graph) {
@@ -88,12 +87,9 @@ import java.util.List;
             }
         }
 
-        public static void main(String[] args) {
-            System.out.println(Arrays.toString(combinations(0, new int[]{2, 1}).toArray()));
-        }
+
 
         public static void main(String[] args) {
-
+            System.out.println(Arrays.toString(combinations(7, new int[]{1, 2, 3, 4, 5}).toArray()));
         }
-
     }
