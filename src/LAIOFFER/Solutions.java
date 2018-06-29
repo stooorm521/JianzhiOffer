@@ -1,9 +1,6 @@
 package LAIOFFER;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Solutions {
 
@@ -326,9 +323,59 @@ public class Solutions {
         }
         return max;
     }
+    //Longest_Ascending_SubArray
+    public static int longest6(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
 
-    public static void main(String[] args) {
-        System.out.print(longest5(new int[]{0, 1, 0, 1, 1, 1, 0}));
+        int size = array.length;
+        int[] helper = new int[size];
+        helper[0] = 1;
+        int max = 1;
+
+        for (int i = 1; i < size; i++) {
+            if (array[i - 1] < array[i]) {
+                helper[i] = helper[i - 1] + 1;
+                max = Math.max(max, helper[i]);
+            } else {
+                helper[i] = 1;
+            }
+        }
+        return max;
     }
 
+    //Longest_Substring_No_Dup
+    public static int longest7(String input) {
+        if (input == null) {
+            return 0;
+        }
+        Map<Character, Integer> freq = new HashMap<>();
+        char[] chars = input.toCharArray();
+        int max = 0;
+        int start = 0;
+
+        for (int end = 0; end < chars.length; end++) {
+            if (!freq.containsKey(chars[end])) {
+                freq.put(chars[end], 1);
+                max = end - start + 1 > max ? end - start + 1 : max;
+            } else if (freq.get(chars[end]) < 1) {
+                freq.put(chars[end], freq.get(chars[end]) + 1);
+                max = end - start + 1 > max ? end - start + 1 : max;
+            } else {
+                int i = start;
+                while (chars[i] != chars[end]) {
+                    freq.put(chars[i], freq.get(chars[i]) - 1);
+                    i++;
+                }
+                start = i + 1;
+            }
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longest7("bcdfbd"));
+    }
 }
